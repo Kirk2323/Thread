@@ -3,6 +3,7 @@ import os
 import sys
 
 #10.128.2.27
+
 host,port =('127.0.0.1', 2049)
 print("Le serveur se lance")
 
@@ -38,6 +39,8 @@ server_socket.close()
 #t.daemon = True
 # start the thread
 #t.start()
+
+
 
 
 

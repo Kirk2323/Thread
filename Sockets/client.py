@@ -4,20 +4,11 @@ host,port =('127.0.0.1', 2049)
 
 client_socket = socket.socket()
 client_socket.connect(("localhost", port))
-#client_socket.connect((host, port))
-
-#message =client_socket.recv(1024).decode()
-
 #ce qui est reçu
 msg =""
 #ce qui est envoyé
 data=""
-#while msg !="exit" and msg !="bye" and data!="bye" and data!="exit":
-#    msg = input("-->")
-#    client_socket.send(msg.encode())
-#    client_socket.recv(1024).decode()
-#    print(data)
-#client_socket.close()
+
 
 
 print("Le client vient de se connecter")
@@ -46,6 +37,31 @@ while a != 1 and a!= 2 :
         print("La connexion vient d'être fermée")
     if a == 2:
         print("Vous pouvez désormais envoyer un message")
+
+
+
+
+#Projet mené en BUT1 l'année dernière
+
+
+#client_socket.connect((host, port))
+
+#message =client_socket.recv(1024).decode()
+
+#while msg !="exit" and msg !="bye" and data!="bye" and data!="exit":
+#    msg = input("-->")
+#    client_socket.send(msg.encode())
+#    client_socket.recv(1024).decode()
+#    print(data)
+#client_socket.close()
+
+
+
+
+
+
+
+
 
 
 
