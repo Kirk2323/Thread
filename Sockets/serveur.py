@@ -4,7 +4,7 @@ import sys
 
 #10.128.2.27
 
-host,port =('127.0.0.1', 2049)
+host,port =('127.0.0.1', 2045)
 print("Le serveur se lance")
 
 server_socket = socket.socket()
@@ -23,22 +23,9 @@ while True:
     rep = input("continuer (y/n)")
     if rep =="n":
         break
+    if rep =="n":
+        pass
 server_socket.close()
-
-#print("Le serveur se lance")
-#server_socket.bind((host,port))
-#server_socket.listen(1)
-#print("Le serveur est en attente de connexion")
-#socket.connect, add_client = server_socket.accept()
-#print(f"Le client {add_client[0]} est connecté sur le port {add_client[1]} ")
-
-
-# make a thread that listens for messages to this client & print them
-#t = Thread(target=listen_for_messages)
-# make the thread daemon so it ends whenever the main thread ends
-#t.daemon = True
-# start the thread
-#t.start()
 
 
 

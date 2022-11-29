@@ -2,7 +2,7 @@ import threading
 import time
 import requests
 import concurrent.futures
-i = int(input("Merci de rentrer le nombre de tests que vous souaitez : "))
+i = int(input("Merci de rentrer le nombre de tests que vous souhaitez : "))
 
 start = time.perf_counter()
 
@@ -32,8 +32,6 @@ for i in range(i):
 
     t1.start()
     t2.start()
-
-
 
 end = time.perf_counter()
 print(f"Tasks ended in {round(end - start, 2)} second(s)")

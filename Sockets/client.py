@@ -1,6 +1,6 @@
 import socket
 
-host,port =('127.0.0.1', 2049)
+host,port =('127.0.0.1', 2045)
 
 client_socket = socket.socket()
 client_socket.connect(("localhost", port))
@@ -35,28 +35,9 @@ while a != 1 and a!= 2 :
     a = int(input("Merci de choisir un chiffre valable (1 ou 2) \n"))
     if a == 1:
         print("La connexion vient d'être fermée")
+        client_socket.close()
     if a == 2:
         print("Vous pouvez désormais envoyer un message")
-
-
-
-
-#Projet mené en BUT1 l'année dernière
-
-
-#client_socket.connect((host, port))
-
-#message =client_socket.recv(1024).decode()
-
-#while msg !="exit" and msg !="bye" and data!="bye" and data!="exit":
-#    msg = input("-->")
-#    client_socket.send(msg.encode())
-#    client_socket.recv(1024).decode()
-#    print(data)
-#client_socket.close()
-
-
-
 
 
 

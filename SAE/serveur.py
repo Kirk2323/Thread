@@ -2,14 +2,14 @@ import socket
 import os
 import sys
 
-#10.128.2.27
-
 host,port =('127.0.0.1', 2047)
 print("Le serveur se lance")
 
 server_socket = socket.socket()
 server_socket.bind((host,port))
 server_socket.listen(1)
+
+print(f"Le serveur {host} est en attente de connexion")
 
 while True:
     conn,address = server_socket.accept()
@@ -23,6 +23,7 @@ while True:
     rep = input("continuer (y/n)")
     if rep =="n":
         break
+
 server_socket.close()
 
 
