@@ -36,7 +36,7 @@ class Client:
             if msg == "1":
                 print("Vous allez être déconnecté")
                 # Ajouter un moyen de se déco
-            elif msg =="8":
+            elif msg =="7":
                 self.commande()
             else:
                 self.__client_socket.send(msg.encode())

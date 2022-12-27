@@ -31,7 +31,7 @@ class Server:
                 print(data)
                 # if data=="1":
                     #FAIRE UN MOYEN DE SE DECONNECTER
-                if data == "2" :
+                if data == "2":
                     message = f"\nVoici l'adresse IP du pc : {socket.gethostbyname(socket.gethostname())}\n"
                     self.__conn.send(message.encode())
                 elif data == "3":
@@ -47,17 +47,16 @@ class Server:
                     vm = round(psutil.virtual_memory()[3] / 1000000000, 2)
                     message = f'\nMémoire RAM utilisé: {psutil.virtual_memory()[2]} % | RAM Utilisé (GB): {vm}\n'
                     self.__conn.send(message.encode())
-                elif data ==  "7":
-                    os.system("ping google.com")
                 #A MODIFIER AUSSI AVEC LE DEF COMMANDE
                 elif data== "quit":
                     message = "Vous venez de quitter l'invite de commande, retour de la liste des commandes via numéro :"
                     self.__conn.send(message.encode())
 
                 else:
-                    os.system(data)
+                    message = os.system(data)
                     self.__conn.send(msg.encode())
             self.__conn.close()
 
 serv = Server()
 serv.start()
+
