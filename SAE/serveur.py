@@ -1,4 +1,4 @@
-import socket,os, sys, platform, psutil
+import socket,os, sys, platform, psutil,subprocess
 
 
 class Server:
@@ -26,11 +26,9 @@ class Server:
             msg = ""
             data = ""
 
-            while msg != "1" and data != "1" and msg != "7" and data != "7":
+            while msg != "1" and data != "1" and msg != "7":
                 data = self.__conn.recv(1024).decode()
                 print(data)
-                # if data=="1":
-                    #FAIRE UN MOYEN DE SE DECONNECTER
                 if data == "2":
                     message = f"\nVoici l'adresse IP du pc : {socket.gethostbyname(socket.gethostname())}\n"
                     self.__conn.send(message.encode())
@@ -38,7 +36,7 @@ class Server:
                     message = f"\nNom de l'os : {platform.system()} | Version du système : {platform.release()}\n"
                     self.__conn.send(message.encode())
                 elif data == "4":
-                    message = f'\nL"usage du CPU est : {psutil.cpu_percent(4)}\n'
+                    message = f'\nL"usage du CPU est : {psutil.cpu_percent(2)}%\n'
                     self.__conn.send(message.encode())
                 elif data == "5":
                     message = f"\nLe nom du pc est : {socket.gethostname()} \n"
@@ -47,16 +45,37 @@ class Server:
                     vm = round(psutil.virtual_memory()[3] / 1000000000, 2)
                     message = f'\nMémoire RAM utilisé: {psutil.virtual_memory()[2]} % | RAM Utilisé (GB): {vm}\n'
                     self.__conn.send(message.encode())
-                #A MODIFIER AUSSI AVEC LE DEF COMMANDE
+
                 elif data== "quit":
-                    message = "Vous venez de quitter l'invite de commande, retour de la liste des commandes via numéro :"
+                    message = "\nLe serveur est désormais déconnecté. Afin de déconnecter le client merci de saisir : 1\n"
                     self.__conn.send(message.encode())
+                    self.__conn.close()
+                    self.__server_socket.close()
 
                 else:
-                    message = os.system(data)
-                    self.__conn.send(msg.encode())
+                    commande = data.split(' ')
+                    try:
+                        self.__process = subprocess.Popen(commande, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                                          text=True, shell=True, encoding="cp850")
+                        output, error = self.__process.communicate()
+
+                    except:
+                        error = 'Ca ne marche pas'
+                        output = 'Ca ne marche pas'
+
+                    if error == '':
+                        if output == '':
+                            message = "La commande marche"
+                        else:
+                            message = output
+                    else:
+                        message = error
+
+                    self.__conn.send(message.encode())
+
             self.__conn.close()
 
 serv = Server()
 serv.start()
+
 

@@ -26,33 +26,23 @@ class Client:
         data = ""
         while msg != "1" and data != "1" and msg != "8" and data != "8":
             msg = input("Voulez vous :"
-                           "\n1. Fermer la connexion : "
+                           "\n1. Fermer la connexion (Saisir quit avant de taper 1) : "
                            "\n2. Avoir l'adresse IP locale :"
                            "\n3. Connaître l'os :"
                            "\n4. Obtenir l'usage du CPU :"
                            "\n5. Avoir le nom du poste :"
                            "\n6. Obtenir la quantité de RAM :"
-                            "\n7. Utiliser l'invite de commande Windows")
+                            "\n7. Utiliser l'invite de commande :"
+                            "\nMerci de Saisir 'quit' si vous souhaitez fermer la connexion lié au serveur puis tapez 1 :")
             if msg == "1":
                 print("Vous allez être déconnecté")
                 # Ajouter un moyen de se déco
-            elif msg =="7":
-                self.commande()
+            elif msg == '7':
+                message = input('Commande à exécuter : ')
+                self.__client_socket.send(message.encode())
             else:
                 self.__client_socket.send(msg.encode())
             data = self.__client_socket.recv(1024).decode()
             print(data)
         self.__client_socket.close()
-
-#Tout refaire ATTENTION NE FONCTIONNE MEME SI YA DE L'IDEE
-    def commande(self):
-        msg = "quit"
-        while msg != quit:
-            msg = input("Vous pouvez saisir votre commande :")
-            self.__client_socket.send(msg.encode())
-            data = self.__client_socket.recv(1024).decode()
-            print(data)
-        else:
-            self.message()
-
 
